@@ -1,0 +1,15 @@
+CMAKE_MINIMUM_REQUIRED(VERSION 3.11)
+
+if (NOT doxygen_FOUND)
+  INCLUDE(FetchContent)
+
+  FetchContent_Declare(doxygen URL https://www.doxygen.nl/files/doxygen-1.9.5.src.tar.gz)
+  FetchContent_GetProperties(doxygen)
+  if (NOT doxygen_POPULATED)
+    SET(FETCHCONTENT_QUIET NO)
+    FetchContent_Populate(doxygen)
+    SET(BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+    ADD_SUBDIRECTORY(${doxygen_SOURCE_DIR} ${doxygen_BINARY_DIR})
+    SET(doxygen_FOUND TRUE)
+  endif()
+endif()

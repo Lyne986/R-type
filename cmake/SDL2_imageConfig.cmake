@@ -1,0 +1,15 @@
+CMAKE_MINIMUM_REQUIRED(VERSION 3.11)
+
+if (NOT SDL2_image_FOUND)
+  INCLUDE(FetchContent)
+
+  FetchContent_Declare(SDL2_image URL https://github.com/libsdl-org/SDL_image/releases/download/release-2.6.2/SDL2_image-2.6.2.tar.gz)
+  FetchContent_GetProperties(SDL2_image)
+  if (NOT SDL2_image_POPULATED)
+    SET(FETCHCONTENT_QUIET NO)
+    FetchContent_Populate(SDL2_image)
+    SET(BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+    ADD_SUBDIRECTORY(${sdl2_image_SOURCE_DIR} ${sdl2_image_BINARY_DIR})
+    SET(SDL2_image_FOUND TRUE)
+  endif()
+endif()

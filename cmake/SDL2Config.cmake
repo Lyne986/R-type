@@ -1,0 +1,15 @@
+CMAKE_MINIMUM_REQUIRED(VERSION 3.11)
+
+if (NOT SDL2_FOUND)
+  INCLUDE(FetchContent)
+
+  FetchContent_Declare(SDL2 URL https://github.com/libsdl-org/SDL/releases/download/release-2.0.22/SDL2-2.0.22.tar.gz)
+  FetchContent_GetProperties(SDL2)
+  if (NOT SDL2_POPULATED)
+    SET(FETCHCONTENT_QUIET NO)
+    FetchContent_Populate(SDL2)
+    SET(BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+    ADD_SUBDIRECTORY(${sdl2_SOURCE_DIR} ${sdl2_BINARY_DIR})
+    SET(SDL2_FOUND TRUE)
+  endif()
+endif()

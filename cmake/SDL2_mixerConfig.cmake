@@ -1,0 +1,15 @@
+CMAKE_MINIMUM_REQUIRED(VERSION 3.11)
+
+if (NOT SDL2_mixer_FOUND)
+  INCLUDE(FetchContent)
+
+  FetchContent_Declare(SDL2_mixer URL https://github.com/libsdl-org/SDL_mixer/releases/download/release-2.6.1/SDL2_mixer-2.6.1.tar.gz)
+  FetchContent_GetProperties(SDL2_mixer)
+  if (NOT SDL2_mixer_POPULATED)
+    SET(FETCHCONTENT_QUIET NO)
+    FetchContent_Populate(SDL2_mixer)
+    SET(BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+    ADD_SUBDIRECTORY(${sdl2_mixer_SOURCE_DIR} ${sdl2_mixer_BINARY_DIR})
+    SET(SDL2_mixer_FOUND TRUE)
+  endif()
+endif()
